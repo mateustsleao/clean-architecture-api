@@ -1,13 +1,14 @@
 import { UserData } from '@/entities'
 import { UserRepository } from '@/usecases/register-user-on-mailing-list/ports'
 import { MongoHelper } from '@/external/respositories/mongodb/helper'
-import { ObjectId, WithId } from 'mongodb'
+import { WithId } from 'mongodb'
 
 interface MongodbUser extends WithId<Document> {
   name: string,
   email: string,
-  _id: ObjectId
 }
+
+interface MongodbUsers extends Array<MongodbUser>{}
 
 export class MongodbUserRepository implements UserRepository {
   async add (user: UserData): Promise<void> {
@@ -15,7 +16,6 @@ export class MongodbUserRepository implements UserRepository {
     const exists = await this.exists(user)
     if (!exists) {
       await userCollection.insertOne(user)
-      throw userCollection
     }
   }
 
@@ -28,8 +28,8 @@ export class MongodbUserRepository implements UserRepository {
     return null
   }
 
-  findAllUsers (): Promise<UserData[]> {
-    throw new Error('Method not implemented.')
+  async findAllUsers (): Promise<UserData[]> {
+    return (await MongoHelper.getCollection('users').find().toArray()) as MongodbUsers
   }
 
   async exists (user: UserData): Promise<boolean> {
