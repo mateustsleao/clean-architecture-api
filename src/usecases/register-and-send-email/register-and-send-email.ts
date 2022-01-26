@@ -2,7 +2,7 @@ import { RegisterUserOnMailingList } from '@/usecases/register-user-on-mailing-l
 import { SendEmail } from '@/usecases/send-email'
 import { UseCase } from '@/usecases/ports'
 import { InvalidEmailError, InvalidNameError } from '@/entities/errors'
-import { User } from '@/entities'
+import { User, UserData } from '@/entities'
 import { Either, left, right } from '@/shared'
 import { MailServiceError } from '@/usecases/errors'
 
@@ -15,8 +15,8 @@ export class RegisterAndSendEmail implements UseCase {
     this.sendEmail = sendEmail
   }
 
-  async perform (request: any):
-    Promise<Either<InvalidNameError | InvalidEmailError | MailServiceError, User>> {
+  async perform (request: UserData):
+    Promise<Either<InvalidNameError | InvalidEmailError | MailServiceError, UserData>> {
     const userOrError: Either<InvalidNameError | InvalidEmailError, User> = User.create(request)
     if (userOrError.isLeft()) {
       return left(userOrError.value)
@@ -30,6 +30,6 @@ export class RegisterAndSendEmail implements UseCase {
     if (result.isLeft()) {
       return left(result.value)
     }
-    return right(user)
+    return right({ name: user.name.value, email: user.email.value })
   }
 }
