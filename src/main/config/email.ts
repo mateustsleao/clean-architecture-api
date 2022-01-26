@@ -1,20 +1,20 @@
 import { EmailOptions } from '@/usecases/send-email/ports'
 
 const attachments = [{
-  filename: 'clean-architecture.pdf',
-  path: 'https://otaviolemos.github.io/clean-architecture.pdf'
+  filename: 'Resume.pdf',
+  path: 'https://github.com/mateustsleao/mateustsleao.github.io/raw/master/Resume.pdf'
 }]
 
 export function getEmailOptions (): EmailOptions {
   const from = 'Mateus Silveira | Software Engineer <mateustsleao@gmail.com>'
   const to = ''
   const html = `
-    <h2> Hi, ${to}.</h2><br><br>
     Thank you for requesting my resume, you can kindly access it through the attachments.
-
+    <br><br>
     Feel free to get in touch.
-
+    <br><br>
     Regards,
+    <br>
     Mateus Toledo | Software Engineer`
 
   const mailOptions: EmailOptions = {

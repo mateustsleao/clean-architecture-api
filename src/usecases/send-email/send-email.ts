@@ -15,8 +15,8 @@ export class SendEmail implements UseCase {
 
   async perform (user: User):
   Promise<Either< MailServiceError, EmailOptions>> {
-    const greetings = `E aí <b> ${user.name.value} </b>, beleza?`
-    const customizedHtml = `${greetings} <br> <br> ${this.emailOptions.html}`
+    const greetings = `<h3> Hi, ${user.name.value}.</h3>I hope you are doing fine.`
+    const customizedHtml = `${greetings} <br><br> ${this.emailOptions.html}`
     const emailInfo: EmailOptions = {
       host: this.emailOptions.host,
       port: this.emailOptions.port,
