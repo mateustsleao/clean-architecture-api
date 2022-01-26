@@ -1,5 +1,5 @@
 import { EmailOptions } from '@/usecases/send-email/ports'
-import { buildEmailTemplate } from 'resources/email-template'
+import { buildEmailTemplate } from '../../../resources/email-template'
 
 const attachments = [{
   filename: 'clean-architecture.pdf',
