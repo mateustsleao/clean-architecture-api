@@ -8,6 +8,15 @@ const attachments = [{
 export function getEmailOptions (): EmailOptions {
   const from = 'Mateus Silveira | Software Engineer <mateustsleao@gmail.com>'
   const to = ''
+  const html = `
+    <h2> Hi, ${to}.</h2><br><br>
+    Thank you for requesting my resume, you can kindly access it through the attachments.
+
+    Feel free to get in touch.
+
+    Regards,
+    Mateus Toledo | Software Engineer`
+
   const mailOptions: EmailOptions = {
     host: process.env.EMAIL_HOST,
     port: Number.parseInt(process.env.EMAIL_PORT),
@@ -15,9 +24,9 @@ export function getEmailOptions (): EmailOptions {
     password: process.env.EMAIL_PASSWORD,
     from: from,
     to: to,
-    subject: 'Mensagem de teste',
+    subject: 'Resume - Mateus Toledo',
     text: '',
-    html: 'teste',
+    html: html,
     attachments: attachments
   }
   return mailOptions
