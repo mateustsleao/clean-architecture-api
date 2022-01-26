@@ -23,8 +23,8 @@ describe('Register route', () => {
       .post('/api/register')
       .send({
         name: 'Any name',
-        email: 'any@mail.com'
+        email: 'mateustoledods@gmail.com'
       })
-      .expect(201)
-  })
+      .expect(200)
+  }, 20000)
 })
