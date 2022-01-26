@@ -1,5 +1,4 @@
 import { EmailOptions } from '@/usecases/send-email/ports'
-import { buildEmailTemplate } from '../../../resources/email-template'
 
 const attachments = [{
   filename: 'clean-architecture.pdf',
@@ -18,7 +17,7 @@ export function getEmailOptions (): EmailOptions {
     to: to,
     subject: 'Mensagem de teste',
     text: '',
-    html: buildEmailTemplate({ name: to }),
+    html: 'teste',
     attachments: attachments
   }
   return mailOptions
